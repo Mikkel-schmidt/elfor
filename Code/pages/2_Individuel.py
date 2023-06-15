@@ -117,8 +117,26 @@ def heatmapp(df):
     pivot.sort_values('day', ascending=False, inplace=True)
     pivot.drop('day', axis=1)
 
-    x_axis = pivot.columns[:-1].tolist()
-    y_axis = pivot.index.tolist()
+    dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']}).reset_index(names=['day', 'hour'])
+    dff.columns = ['_'.join(tup).rstrip('_') for tup in dff.columns.values]
+    #st.write(dff)
+    dff['day_'] = dff['day']
+    dff['day_'].replace({
+            "Mandag": 0,
+            "Tirsdag": 1,
+            "Onsdag": 2,
+            "Torsdag": 3,
+            "Fredag": 4,
+            "Lørdag": 5,
+            "Søndag": 6},
+            inplace=True,)
+    dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
+    #st.write(dff)
+    dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
+    
+
+    x_axis = dff['x-axis'].columns[:-1].tolist()
+    y_axis = dff.indexvwev.tolist()
     data = [[i, j, pivot.iloc[j,i].round(1)] for i in range(24) for j in range(7)]
 
     b1 = (
@@ -170,7 +188,7 @@ def ugeprofil(df):
             "Søndag": 6},
             inplace=True,)
     dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
-    st.write(dff)
+    #st.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
 
