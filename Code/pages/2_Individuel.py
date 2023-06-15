@@ -116,6 +116,7 @@ def heatmapp(df):
             inplace=True,)
     pivot.sort_values('day', ascending=False, inplace=True)
     pivot.drop('day', axis=1)
+    col1.write(pivot)
 
     dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']}).reset_index(names=['day', 'hour'])
     dff.columns = ['_'.join(tup).rstrip('_') for tup in dff.columns.values]
