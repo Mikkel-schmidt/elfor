@@ -114,7 +114,7 @@ def heatmapp(df):
             "Lørdag": 5,
             "Søndag": 6},
             inplace=True,)
-    pivot.sort_values('day', ascending=False, inplace=True)
+    pivot.sort_values('day', ascending=True, inplace=True)
     pivot.drop('day', axis=1)
     col1.write(pivot)
 
