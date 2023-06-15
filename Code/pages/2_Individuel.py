@@ -103,22 +103,6 @@ with col2:
 
 #@st.cache_resource
 def heatmapp(df):
-    pivot = df.pivot_table(index=df['from'].dt.day_name(locale='da_DK'), columns=df['from'].dt.hour, aggfunc='mean', values='amount', sort=False)
-    pivot['day'] = pivot.index
-    col1.write(pivot)
-    pivot['day'].replace({
-            "Mandag": 0,
-            "Tirsdag": 1,
-            "Onsdag": 2,
-            "Torsdag": 3,
-            "Fredag": 4,
-            "Lørdag": 5,
-            "Søndag": 6},
-            inplace=True,)
-    pivot.sort_values('day', ascending=True, inplace=True)
-    pivot.drop('day', axis=1)
-    col1.write(pivot)
-
     dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']}).reset_index(names=['day', 'hour'])
     dff.columns = ['_'.join(tup).rstrip('_') for tup in dff.columns.values]
     #st.write(dff)
@@ -133,15 +117,14 @@ def heatmapp(df):
             "Søndag": 6},
             inplace=True,)
     dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
-    col1.write(dff)
+    #col1.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
 
     pivot = dff.pivot_table(index='day', columns='hour', aggfunc='mean', values='amount_mean', sort=False)
-    col1.write(pivot)
-    
+    #col1.write(pivot)
 
-    x_axis = dff['x-axis'].columns[:-1].tolist()
-    y_axis = dff.index.tolist()
+    x_axis = pivot.columns[:-1].tolist()
+    y_axis = pivot.index.tolist()
     data = [[i, j, pivot.iloc[j,i].round(1)] for i in range(24) for j in range(7)]
 
     b1 = (
