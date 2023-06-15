@@ -275,158 +275,158 @@ with col1:
     st_pyecharts(figur, height='400px')
 
 
-st.markdown('---')
-col1, col2 = st.columns([3,1])
-abn, luk = col2.slider('Vælg bygningens åbningstider', min_value=1, max_value=24, value=(6, 18))
-col1.subheader('Standby forbrug')
-col1.markdown("""Nedenunder kan man se hvor meget af forbruget der ligger udenfor åbningstiderne, som der kan defineres til højre.
-I figuren til venstre kan man se hvor meget af det totale forbrug ligger i og udenfor åbningstid. I figuren til højre er det gennemsnitlige timeforbrug. """)
-col1.markdown('Den inderste cirkel i figuren til venstre viser bygningsmassens fordeling til sammenligning.')
+# st.markdown('---')
+# col1, col2 = st.columns([3,1])
+# abn, luk = col2.slider('Vælg bygningens åbningstider', min_value=1, max_value=24, value=(6, 18))
+# col1.subheader('Standby forbrug')
+# col1.markdown("""Nedenunder kan man se hvor meget af forbruget der ligger udenfor åbningstiderne, som der kan defineres til højre.
+# I figuren til venstre kan man se hvor meget af det totale forbrug ligger i og udenfor åbningstid. I figuren til højre er det gennemsnitlige timeforbrug. """)
+# col1.markdown('Den inderste cirkel i figuren til venstre viser bygningsmassens fordeling til sammenligning.')
 
-#@st.cache_resource
-# def piee(df):
-#     hej = df.groupby('day-moment').sum()['amount'].reset_index()
-#     data = [list(z) for z in zip(hej['day-moment'], hej['amount'])]
-#     #st.write(data)
-#     # if not st.session_state['df_over_standby']:
-#     p = (
-#         Pie()
-#         .add(
-#             series_name='Forbrug i perioder',
-#             data_pair=data,
-#             #rosetype="area",
-#             radius=["40%", "70%"],
-#             #center=["85%", "50%"],
-#             label_opts=opts.LabelOpts(position="outside",
-#             formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
-#             background_color="#eee",
-#             border_color="#aaa",
-#             border_width=1,
-#             border_radius=4,
-#             rich={
-#                 "a": {"color": "#999", "lineHeight": 22, "align": "center"},
-#                 "abg": {
-#                     "backgroundColor": "#e3e3e3",
-#                     "width": "100%",
-#                     "align": "right",
-#                     "height": 22,
-#                     "borderRadius": [4, 4, 0, 0],
-#                 },
-#                 "hr": {
-#                     "borderColor": "#aaa",
-#                     "width": "100%",
-#                     "borderWidth": 0.5,
-#                     "height": 0,
-#                 },
-#                 "b": {"fontSize": 12, "lineHeight": 33},
-#                 "per": {
-#                     "color": "#eee",
-#                     "backgroundColor": "#334455",
-#                     "padding": [2, 4],
-#                     "borderRadius": 2,
-#                 },
-#             },),
-#             #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
-#         )
+# #@st.cache_resource
+# # def piee(df):
+# #     hej = df.groupby('day-moment').sum()['amount'].reset_index()
+# #     data = [list(z) for z in zip(hej['day-moment'], hej['amount'])]
+# #     #st.write(data)
+# #     # if not st.session_state['df_over_standby']:
+# #     p = (
+# #         Pie()
+# #         .add(
+# #             series_name='Forbrug i perioder',
+# #             data_pair=data,
+# #             #rosetype="area",
+# #             radius=["40%", "70%"],
+# #             #center=["85%", "50%"],
+# #             label_opts=opts.LabelOpts(position="outside",
+# #             formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
+# #             background_color="#eee",
+# #             border_color="#aaa",
+# #             border_width=1,
+# #             border_radius=4,
+# #             rich={
+# #                 "a": {"color": "#999", "lineHeight": 22, "align": "center"},
+# #                 "abg": {
+# #                     "backgroundColor": "#e3e3e3",
+# #                     "width": "100%",
+# #                     "align": "right",
+# #                     "height": 22,
+# #                     "borderRadius": [4, 4, 0, 0],
+# #                 },
+# #                 "hr": {
+# #                     "borderColor": "#aaa",
+# #                     "width": "100%",
+# #                     "borderWidth": 0.5,
+# #                     "height": 0,
+# #                 },
+# #                 "b": {"fontSize": 12, "lineHeight": 33},
+# #                 "per": {
+# #                     "color": "#eee",
+# #                     "backgroundColor": "#334455",
+# #                     "padding": [2, 4],
+# #                     "borderRadius": 2,
+# #                 },
+# #             },),
+# #             #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
+# #         )
+# #         .set_global_opts(
+# #             legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
+# #             title_opts=opts.TitleOpts(
+# #                 title='Forbrug i perioder', pos_left="center"
+# #             ),
+# #             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+# #         )
+# #     )
+#     # else:
+#     #     data2 = st.session_state['df_over_standby']
+#     #     p = (
+#     #         Pie()
+#     #         .add(
+#     #             series_name=df['Adresse'],
+#     #             data_pair=data,
+#     #             #rosetype="area",
+#     #             radius=["40%", "70%"],
+#     #             #center=["85%", "50%"],
+#     #             label_opts=opts.LabelOpts(position="outside",
+#     #             formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
+#     #             background_color="#eee",
+#     #             border_color="#aaa",
+#     #             border_width=1,
+#     #             border_radius=4,
+#     #             rich={
+#     #                 "a": {"color": "#999", "lineHeight": 22, "align": "center"},
+#     #                 "abg": {
+#     #                     "backgroundColor": "#e3e3e3",
+#     #                     "width": "100%",
+#     #                     "align": "right",
+#     #                     "height": 22,
+#     #                     "borderRadius": [4, 4, 0, 0],
+#     #                 },
+#     #                 "hr": {
+#     #                     "borderColor": "#aaa",
+#     #                     "width": "100%",
+#     #                     "borderWidth": 0.5,
+#     #                     "height": 0,
+#     #                 },
+#     #                 "b": {"fontSize": 12, "lineHeight": 33},
+#     #                 "per": {
+#     #                     "color": "#eee",
+#     #                     "backgroundColor": "#334455",
+#     #                     "padding": [2, 4],
+#     #                     "borderRadius": 2,
+#     #                 },
+#     #             },),
+#     #             #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
+#     #         )
+#     #         .add(
+#     #             series_name='Bygningsmassens forbrug',
+#     #             data_pair=data2,
+#     #             #rosetype="area",
+#     #             radius=["20%", "30%"],
+#     #             #center=["85%", "50%"],
+#     #             #label_opts=opts.LabelOpts(position="inside",)
+#     #         )
+#     #         .set_global_opts(
+#     #             legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
+#     #             title_opts=opts.TitleOpts(
+#     #                 title='Forbrug i perioder', pos_left="center"
+#     #             ),
+#     #             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+#     #         )
+#     #     )
+
+#     # return p
+
+# #st.write(df.groupby('day-moment').agg({'amount': 'sum', 'from': 'count'}).reset_index())
+# def bars(df, grader):
+#     df = df.sort_values('amount')
+#     b1 = (
+#         Bar()
+#         .add_xaxis(list(df['day-moment']))
+#         .add_yaxis('Intensitet per kvadratmeter', list(df['amount']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
+#         .reversal_axis()
 #         .set_global_opts(
-#             legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
-#             title_opts=opts.TitleOpts(
-#                 title='Forbrug i perioder', pos_left="center"
-#             ),
+#             datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
+#             legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", is_show=True),
+#             xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
+#             title_opts=opts.TitleOpts(title='Forbrug mellem 6 og 18 og standby', pos_left="center"),
 #             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
 #         )
+#         .set_series_opts()
 #     )
-    # else:
-    #     data2 = st.session_state['df_over_standby']
-    #     p = (
-    #         Pie()
-    #         .add(
-    #             series_name=df['Adresse'],
-    #             data_pair=data,
-    #             #rosetype="area",
-    #             radius=["40%", "70%"],
-    #             #center=["85%", "50%"],
-    #             label_opts=opts.LabelOpts(position="outside",
-    #             formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
-    #             background_color="#eee",
-    #             border_color="#aaa",
-    #             border_width=1,
-    #             border_radius=4,
-    #             rich={
-    #                 "a": {"color": "#999", "lineHeight": 22, "align": "center"},
-    #                 "abg": {
-    #                     "backgroundColor": "#e3e3e3",
-    #                     "width": "100%",
-    #                     "align": "right",
-    #                     "height": 22,
-    #                     "borderRadius": [4, 4, 0, 0],
-    #                 },
-    #                 "hr": {
-    #                     "borderColor": "#aaa",
-    #                     "width": "100%",
-    #                     "borderWidth": 0.5,
-    #                     "height": 0,
-    #                 },
-    #                 "b": {"fontSize": 12, "lineHeight": 33},
-    #                 "per": {
-    #                     "color": "#eee",
-    #                     "backgroundColor": "#334455",
-    #                     "padding": [2, 4],
-    #                     "borderRadius": 2,
-    #                 },
-    #             },),
-    #             #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
-    #         )
-    #         .add(
-    #             series_name='Bygningsmassens forbrug',
-    #             data_pair=data2,
-    #             #rosetype="area",
-    #             radius=["20%", "30%"],
-    #             #center=["85%", "50%"],
-    #             #label_opts=opts.LabelOpts(position="inside",)
-    #         )
-    #         .set_global_opts(
-    #             legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
-    #             title_opts=opts.TitleOpts(
-    #                 title='Forbrug i perioder', pos_left="center"
-    #             ),
-    #             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
-    #         )
-    #     )
+#     return b1
 
-    # return p
+# col1, col2 = st.columns([2,3])
 
-#st.write(df.groupby('day-moment').agg({'amount': 'sum', 'from': 'count'}).reset_index())
-def bars(df, grader):
-    df = df.sort_values('amount')
-    b1 = (
-        Bar()
-        .add_xaxis(list(df['day-moment']))
-        .add_yaxis('Intensitet per kvadratmeter', list(df['amount']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
-        .reversal_axis()
-        .set_global_opts(
-            datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
-            legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", is_show=True),
-            xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
-            title_opts=opts.TitleOpts(title='Forbrug mellem 6 og 18 og standby', pos_left="center"),
-            toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
-        )
-        .set_series_opts()
-    )
-    return b1
+# # with col1:
+# #     figur = piee(df)
+# #     st_pyecharts(figur, height='400px')
 
-col1, col2 = st.columns([2,3])
+# #figur = piee(df)
+# #st_pyecharts(figur, height='400px')
 
-# with col1:
-#     figur = piee(df)
+# with col2:
+#     figur = bars(df.groupby('day-moment').sum()['amount'].reset_index(), 90)
 #     st_pyecharts(figur, height='400px')
-
-#figur = piee(df)
-#st_pyecharts(figur, height='400px')
-
-with col2:
-    figur = bars(df.groupby('day-moment').sum()['amount'].reset_index(), 90)
-    st_pyecharts(figur, height='400px')
 
 
 st.markdown('---')
