@@ -131,7 +131,7 @@ def heatmapp(df):
             "Søndag": 6},
             inplace=True,)
     dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
-    #st.write(dff)
+    col1.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     
 
