@@ -116,7 +116,7 @@ def heatmapp(df):
             "Lørdag": 5,
             "Søndag": 6},
             inplace=True,)
-    dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
+    dff.sort_values(['day_', 'hour'], ascending=False, inplace=True)
     #col1.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
 
@@ -421,8 +421,8 @@ col1, col2 = st.columns([2,3])
 #     figur = piee(df)
 #     st_pyecharts(figur, height='400px')
 
-figur = piee(df)
-st_pyecharts(figur, height='400px')
+#figur = piee(df)
+#st_pyecharts(figur, height='400px')
 
 with col2:
     figur = bars(df.groupby('day-moment').sum()['amount'].reset_index(), 90)
