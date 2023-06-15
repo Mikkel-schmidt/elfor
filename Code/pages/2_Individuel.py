@@ -103,7 +103,7 @@ with col2:
 
 #@st.cache_resource
 def heatmapp(df):
-    pivot = df.pivot_table(index=df['from'].dt.day_name(), columns=df['from'].dt.hour, aggfunc='mean', values='amount', sort=False)
+    pivot = df.pivot_table(index=df['from'].dt.day_name(locale='da_DK'), columns=df['from'].dt.hour, aggfunc='mean', values='amount', sort=False)
     pivot['day'] = pivot.index
     col1.write(pivot)
     pivot['day'].replace({
@@ -135,6 +135,9 @@ def heatmapp(df):
     dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
     col1.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
+
+    pivot = dff.pivot_table(index='day', columns='hour', aggfunc='mean', values='amount_mean', sort=False)
+    col1.write(pivot)
     
 
     x_axis = dff['x-axis'].columns[:-1].tolist()
