@@ -394,7 +394,7 @@ col1.markdown('Den inderste cirkel i figuren til venstre viser bygningsmassens f
     #         )
     #     )
 
-    return p
+    # return p
 
 #st.write(df.groupby('day-moment').agg({'amount': 'sum', 'from': 'count'}).reset_index())
 def bars(df, grader):
