@@ -137,7 +137,7 @@ def heatmapp(df):
     
 
     x_axis = dff['x-axis'].columns[:-1].tolist()
-    y_axis = dff.indexvwev.tolist()
+    y_axis = dff.index.tolist()
     data = [[i, j, pivot.iloc[j,i].round(1)] for i in range(24) for j in range(7)]
 
     b1 = (
