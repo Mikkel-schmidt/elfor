@@ -170,7 +170,7 @@ def ugeprofil(df):
             "Søndag": 6},
             inplace=True,)
     dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
-    #st.write(dff)
+    st.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
 
