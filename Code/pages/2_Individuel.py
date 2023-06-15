@@ -429,52 +429,52 @@ with col1:
 #     st_pyecharts(figur, height='400px')
 
 
-st.markdown('---')
+# st.markdown('---')
 
-col1, col2 = st.columns([1,1])
-col1.subheader('Kalender oversigt')
-col1.markdown("""I den nedenstående grafik kan man se hvordan forbruget fordeler sig henover året. 
-""")
+# col1, col2 = st.columns([1,1])
+# col1.subheader('Kalender oversigt')
+# col1.markdown("""I den nedenstående grafik kan man se hvordan forbruget fordeler sig henover året. 
+# """)
 
 
-maxx = df.groupby(df['from'].dt.date).sum()['amount'].max()
-minn = df.groupby(df['from'].dt.date).sum()['amount'].min()
-aar = col2.multiselect('Vælg år', df['from'].dt.year.unique(), default=2022)
+# maxx = df.groupby(df['from'].dt.date).sum()['amount'].max()
+# minn = df.groupby(df['from'].dt.date).sum()['amount'].min()
+# aar = col2.multiselect('Vælg år', df['from'].dt.year.unique(), default=2022)
 
  
-#@st.cache_resource
-def Calendarr(df, maxx, aar):
-    data = [[df.loc[i, 'from'], df.loc[i, 'amount']] for i in range(len(df['from']))]
-    b1 = (
-        Calendar()
-        .add(series_name=str(aar),
-    yaxis_data=data,
-    calendar_opts=opts.CalendarOpts(
-    pos_left="30" ,
-    pos_right="30",
-    range_=str(aar), 
-    yearlabel_opts=opts.CalendarYearLabelOpts(is_show=False),
-    daylabel_opts=opts.CalendarDayLabelOpts(name_map="en"),
-    #monthlabel_opts=opts.CalendarMonthLabelOpts(name_map="en"),
-    ))
-        .set_global_opts(
-            legend_opts=opts.LegendOpts(orient='vertical', pos_left="center", is_show=True),
-            title_opts=opts.TitleOpts(
-            ),
-            toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
-            visualmap_opts=opts.VisualMapOpts(
-            max_= maxx, min_=minn, orient="horizontal", is_piecewise=False 
-            ),
-        )
-        .set_series_opts(
-        )
-    ) 
-    return b1
-#st.write(df)
-#st.write(df.groupby('from').sum().reset_index())
-for i in aar:
-    figure = Calendarr(df.groupby(df['from'].dt.date).sum()['amount'].reset_index(), maxx, i)
-    st_pyecharts(figure, height='400px', key='hejsa'+str(i))
+# #@st.cache_resource
+# def Calendarr(df, maxx, aar):
+#     data = [[df.loc[i, 'from'], df.loc[i, 'amount']] for i in range(len(df['from']))]
+#     b1 = (
+#         Calendar()
+#         .add(series_name=str(aar),
+#     yaxis_data=data,
+#     calendar_opts=opts.CalendarOpts(
+#     pos_left="30" ,
+#     pos_right="30",
+#     range_=str(aar), 
+#     yearlabel_opts=opts.CalendarYearLabelOpts(is_show=False),
+#     daylabel_opts=opts.CalendarDayLabelOpts(name_map="en"),
+#     #monthlabel_opts=opts.CalendarMonthLabelOpts(name_map="en"),
+#     ))
+#         .set_global_opts(
+#             legend_opts=opts.LegendOpts(orient='vertical', pos_left="center", is_show=True),
+#             title_opts=opts.TitleOpts(
+#             ),
+#             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+#             visualmap_opts=opts.VisualMapOpts(
+#             max_= maxx, min_=minn, orient="horizontal", is_piecewise=False 
+#             ),
+#         )
+#         .set_series_opts(
+#         )
+#     ) 
+#     return b1
+# #st.write(df)
+# #st.write(df.groupby('from').sum().reset_index())
+# for i in aar:
+#     figure = Calendarr(df.groupby(df['from'].dt.date).sum()['amount'].reset_index(), maxx, i)
+#     st_pyecharts(figure, height='400px', key='hejsa'+str(i))
 
 
 
