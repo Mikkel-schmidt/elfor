@@ -8,6 +8,7 @@ from datetime import timedelta
 from tqdm import tqdm
 from stqdm import stqdm
 import ruptures as rpt
+from urllib.parse import quote
 
 
 from streamlit_functions import select_tree, getMeterPoints, getMeterReadings
@@ -41,7 +42,7 @@ IDs = list(st.session_state.valgt_meter)
 
 @st.cache_data
 def meters_indi(): 
-    df = pd.read_csv('https://github.com/Mikkel-schmidt/elfor/raw/master/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv')
+    df = pd.read_csv(quote('https://github.com/Mikkel-schmidt/elfor/raw/master/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv'))
     #df = df[df['meter'].isin(list(st.session_state.valgt_meter))]
     return df
 
