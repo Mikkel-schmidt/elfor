@@ -118,11 +118,12 @@ def heatmapp(df):
             "Søndag": 6},
             inplace=True,)
     dff.sort_values(['day_', 'hour'], ascending=False, inplace=True)
-    dff = dff.iloc[:, ::-1]
+    
     #col1.write(dff)
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
 
     pivot = dff.pivot_table(index='day', columns='hour', aggfunc='mean', values='amount_mean', sort=False)
+    pivot = pivot.iloc[:, ::-1]
     #col1.write(pivot)
 
     x_axis = pivot.columns[:-1].tolist()
