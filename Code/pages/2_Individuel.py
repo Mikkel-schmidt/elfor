@@ -129,7 +129,7 @@ def heatmapp(df):
     x_axis = pivot.columns[:-1].tolist()
     y_axis = pivot.index.tolist()
     data = [[i, j, pivot.iloc[j,i].round(1)] for i in reversed(range(24)) for j in range(7)]
-    st.write(pivot)
+    #st.write(pivot)
 
     b1 = (
         HeatMap()
