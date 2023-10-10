@@ -56,7 +56,7 @@ df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
 
 
 st.header('Ugeoverblik')
-st.write(IDs)
+st.write(df)
 
 #@st.cache_resource
 def heatmapp(df):
