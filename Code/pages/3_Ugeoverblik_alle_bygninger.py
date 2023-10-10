@@ -45,7 +45,7 @@ def meters_indi():
 
 df = meters_indi() 
 
-adresser = df['Adresse'].unique()
+adresser = df['Adresse'].unique().sort_values()
 
 # df['meter'] = pd.to_numeric(df['meter'])
 # #df = df[df['Adresse'].isin(IDs)]
@@ -112,6 +112,7 @@ for adr in adresser:
     df_adr['from'] = pd.to_datetime(df_adr['from'], utc=True)
     df_adr['ugedag'] = df_adr['from'].dt.day_name(locale='da_DK')
 
+    st.write(adr)
     figure = heatmapp(df_adr.iloc[-2159:])
     st_pyecharts(figure, height='400px', key=str(adr))
 
