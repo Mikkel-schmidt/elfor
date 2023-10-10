@@ -45,10 +45,12 @@ def meters_indi():
 
 df = meters_indi() 
 
-df['meter'] = pd.to_numeric(df['meter'])
-#df = df[df['Adresse'].isin(IDs)]
-df['from'] = pd.to_datetime(df['from'], utc=True)
-df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
+adresser = df['Adresse'].unique()
+
+# df['meter'] = pd.to_numeric(df['meter'])
+# #df = df[df['Adresse'].isin(IDs)]
+# df['from'] = pd.to_datetime(df['from'], utc=True)
+# df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
 
 #st.write(df['meter'].unique().isin(list(st.session_state.valgt_meter)))
 
@@ -56,7 +58,7 @@ df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
 
 
 st.header('Ugeoverblik')
-st.write(df)
+st.write(adresser)
 
 #@st.cache_resource
 def heatmapp(df):
