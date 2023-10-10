@@ -46,7 +46,7 @@ def meters_indi():
 df = meters_indi() 
 
 adresser = df['Adresse'].unique()
-adresser = adresser.sort()
+adresser = adresser.sort_values(ascending=True)
 
 # df['meter'] = pd.to_numeric(df['meter'])
 # #df = df[df['Adresse'].isin(IDs)]
