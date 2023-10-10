@@ -58,49 +58,8 @@ df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
 
 col1, col2 = st.columns([1,4])
 
-col1.header('Individuelle målere')
-col1.markdown('På denne side er der analyser der beskriver de enkelte målere og giver et indblik i forskellige målere.')
-col1.markdown("""Til højre kan man se timeforbruget fra målerne på bygningen. 
-Ud fra dette har er der lavet et løbende gennemsnit over de sidste 24 timer.""")
-col1.markdown("""
-Change point detection viser forskellige perioder hvor bygningen er blevet driftet på forskellige måder. 
-Det finder algoritmen ud fra ved at kigge på gennemsnittet, variationen i forbruget, peaks i forbruget og andre atypiske mønstre i forbruget.
-""")
-col1.markdown('Perioden kan ændres ved at trække i baren i bunden af figuren.')
+col1.header('Ugeoverblik')
 
-@st.cache_resource()
-def linesss(df):
-    b1 = (
-        Line()
-        .add_xaxis(list(df['from']))
-        .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=2, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts( width=1), areastyle_opts=opts.AreaStyleOpts(opacity=0.3),)
-        .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-        linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
-        .add_yaxis('Best', list(df['bkps'].where(df['bkps']==df['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-        linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
-        .set_global_opts(
-            legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
-            title_opts=opts.TitleOpts(),
-            toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
-            yaxis_opts=opts.AxisOpts(
-                name='Forbrug [kWh]',
-                type_="value",
-                axistick_opts=opts.AxisTickOpts(is_show=True),
-                splitline_opts=opts.SplitLineOpts(is_show=True)),
-            xaxis_opts=opts.AxisOpts(name='Tid'),
-            datazoom_opts=[
-                opts.DataZoomOpts(range_start=0, range_end=100),
-                opts.DataZoomOpts(type_="inside", range_start=0, range_end=100),
-            ],
-            )
-        .set_series_opts()
-    )
-    return b1
-
-with col2:
-    figur = linesss(df.groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index())
-    st_pyecharts(figur, height='600px')
 
 #@st.cache_resource
 def heatmapp(df):
