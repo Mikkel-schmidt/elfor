@@ -108,8 +108,8 @@ def heatmapp(df):
 for adr in adresser:
     df_adr = df[df['Adresse']==adr]
 
-    df_adr['meter'] = pd.to_numeric(df['meter'])
-    df_adr['from'] = pd.to_datetime(df['from'], utc=True)
+    df_adr['meter'] = pd.to_numeric(df_adr['meter'])
+    df_adr['from'] = pd.to_datetime(df_adr['from'], utc=True)
     df_adr['ugedag'] = df_adr['from'].dt.day_name(locale='da_DK')
 
     figure = heatmapp(df_adr.iloc[-2159:])
