@@ -34,10 +34,7 @@ st.set_page_config(layout="wide", page_title="Individuel forbrug", page_icon="ht
 st.sidebar.image('https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845f-38483b42ba8b.png')
 nodes = select_tree()
 #st.write(nodes)
-if not st.session_state.valgt_meter:
-    st.warning('Vær sød at vælge en adresse ude i siden') 
-    st.stop()
-IDs = list(st.session_state.valgt_meter)
+#IDs = list(st.session_state.valgt_meter)
 #st.write(IDs)
 
 @st.cache_data
@@ -49,7 +46,7 @@ def meters_indi():
 df = meters_indi() 
 
 df['meter'] = pd.to_numeric(df['meter'])
-df = df[df['Adresse'].isin(IDs)]
+#df = df[df['Adresse'].isin(IDs)]
 df['from'] = pd.to_datetime(df['from'], utc=True)
 df['ugedag'] = df['from'].dt.day_name(locale='da_DK')
 
