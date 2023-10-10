@@ -59,7 +59,7 @@ adresser = np.sort(adresser)
 
 
 st.header('Ugeoverblik')
-st.write(adresser)
+#st.write(adresser)
 
 #@st.cache_resource
 def heatmapp(df):
