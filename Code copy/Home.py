@@ -73,7 +73,7 @@ if check_password():
     #df = df.groupby('Adresse').mean().reset_index()
     
     if 'df_select' not in st.session_state:
-        st.session_state['df_select'] = df[['meter', 'Adresse', 'amount']].groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
+        st.session_state['df_select'] = df[['meter', 'Adresse', 'amount', 'bkps']].groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
     nodes = select_tree()
 
