@@ -160,6 +160,16 @@ col2.markdown('Tallet i midten er det gennemsnitlige forbrug i den time på den 
 
 # df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
+# Find the maximum date in the dataframe
+max_date = df['from'].dt.date.max()
+
+# Calculate the date three months prior
+three_months_prior = max_date - pd.DateOffset(months=3)
+
+# Filter the dataframe to keep only the last three months of data
+df_3mdr = df[df['from'] >= three_months_prior]
+
+
 with col1:
     figure = heatmapp(df.iloc[-2159:])
     st_pyecharts(figure, height='400px', key='hej')
@@ -188,6 +198,7 @@ def ugeprofil(df):
 
 # uge = ugeprofil(df_opti)
 # uge2 = ugeprofil(df_norm)
+uge = ugeprofil(df_3mdr)
 
 #st.write(uge2)
 
@@ -202,7 +213,7 @@ def ugeprofil(df):
 
  
 @st.cache_resource
-def liness(df, df2):
+def liness(df):
     b1 = (
         Line()
         .add_xaxis(list(df['x-axis']))
@@ -231,7 +242,7 @@ def liness(df, df2):
     return b1
 
 with col1:
-    figur = liness(uge2, uge)
+    figur = liness(uge)
     st_pyecharts(figur, height='400px')
 
 #st.write(list(uge2['hour'].unique()))
