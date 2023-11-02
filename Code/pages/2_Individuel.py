@@ -165,10 +165,10 @@ max_date = df['from'].dt.date.max()
 st.write(max_date)
 # Calculate the date three months prior
 three_months_prior = max_date - pd.DateOffset(months=3)
-st
+
 # Filter the dataframe to keep only the last three months of data
 df_3mdr = df[df['from'].dt.date >= three_months_prior].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
-
+st.write(df_3mdr)
 
 with col1:
     figure = heatmapp(df.iloc[-2159:])
