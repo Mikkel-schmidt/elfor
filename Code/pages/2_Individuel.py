@@ -75,10 +75,10 @@ def linesss(df):
         .add_xaxis(list(df['from']))
         .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=2, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts( width=1), areastyle_opts=opts.AreaStyleOpts(opacity=0.3),)
-        .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-        linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
-        .add_yaxis('Best', list(df['bkps'].where(df['bkps']==df['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-        linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
+        # .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+        # linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
+        # .add_yaxis('Best', list(df['bkps'].where(df['bkps']==df['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+        # linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
             title_opts=opts.TitleOpts(),
@@ -153,12 +153,12 @@ col2.markdown("""I figuren til venstre kan man se hvordan forbruget fordeler sig
 Her burde man kunne se hvordan åbningstiderne i bygningen er og om bygningen lukkes ned udenfor åbningstid""")
 col2.markdown('Tallet i midten er det gennemsnitlige forbrug i den time på den ugedag.')
 
-if df['bkps'].iloc[-1] >= df['bkps'].max():
-    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
-else:
-    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+# if df['bkps'].iloc[-1] >= df['bkps'].max():
+#     df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+# else:
+#     df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
-df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+# df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 with col1:
     figure = heatmapp(df.iloc[-2159:])
@@ -186,18 +186,18 @@ def ugeprofil(df):
 
 
 
-uge = ugeprofil(df_opti)
-uge2 = ugeprofil(df_norm)
+# uge = ugeprofil(df_opti)
+# uge2 = ugeprofil(df_norm)
 
 #st.write(uge2)
 
 #st.write(ug)
 #st.write(ug2)
-ugg = uge[['day', 'hour', 'amount_mean', 'x-axis']].merge(uge2[['day', 'hour', 'amount_mean']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
-ugg['besparelse_kwh'] = ugg['amount_mean_now'] - ugg['amount_mean_opti']
-st.write('Mulig besparelse på ' + str(ugg['besparelse_kwh'].sum()*52) + ' kWh')
-st.write('Årlig forbrug på ' + str(ugg['amount_mean_now'].sum()*52) + ' kWh')
-st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_mean_now'].sum()*52)*100) + '%')
+# ugg = uge[['day', 'hour', 'amount_mean', 'x-axis']].merge(uge2[['day', 'hour', 'amount_mean']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
+# ugg['besparelse_kwh'] = ugg['amount_mean_now'] - ugg['amount_mean_opti']
+# st.write('Mulig besparelse på ' + str(ugg['besparelse_kwh'].sum()*52) + ' kWh')
+# st.write('Årlig forbrug på ' + str(ugg['amount_mean_now'].sum()*52) + ' kWh')
+# st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_mean_now'].sum()*52)*100) + '%')
 
 
  
@@ -209,9 +209,9 @@ def liness(df, df2):
         .add_yaxis('Timeforbrug', list(df['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=2), 
         )
-        .add_yaxis('Optimeret', list(df2['amount_mean']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=2), 
-        )
+        # .add_yaxis('Optimeret', list(df2['amount_mean']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        # linestyle_opts=opts.LineStyleOpts(width=2), 
+        # )
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
             title_opts=opts.TitleOpts(),
