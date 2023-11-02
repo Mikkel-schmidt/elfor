@@ -162,13 +162,13 @@ col2.markdown('Tallet i midten er det gennemsnitlige forbrug i den time på den 
 
 # Find the maximum date in the dataframe
 max_date = df['from'].max()
-st.write(max_date)
+#st.write(max_date)
 # Calculate the date three months prior
 three_months_prior = max_date - pd.DateOffset(months=3)
 
 # Filter the dataframe to keep only the last three months of data
 df_3mdr = df[df['from'] >= three_months_prior].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
-st.write(df_3mdr)
+#st.write(df_3mdr)
 
 with col1:
     figure = heatmapp(df.iloc[-2159:])
@@ -286,7 +286,7 @@ def liness(df):
     return b1
 
 with col1:
-    figur = liness(uge2)
+    figur = liness(uge)
     st_pyecharts(figur, height='400px')
 
 
