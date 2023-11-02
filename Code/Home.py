@@ -135,7 +135,7 @@ if check_password():
 
 
     #with col2:
-    adr = st.selectbox('Select', df_besp['Adresse'].sort_values('årligt forbrug', ascending=False).unique())
+    adr = st.selectbox('Select', df_besp.sort_values('årligt forbrug', ascending=False)['Adresse'].unique())
     dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum'}).reset_index()
     st.write('Forbruget er ', str(df_besp[df_besp['Adresse']==adr]['årligt forbrug'].values[0].round(0)), ' kWh om året')
 
