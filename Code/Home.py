@@ -126,7 +126,7 @@ if check_password():
     st.markdown('---')
     col1 , col2= st.columns([1,1])
     col1.header('Top 10 forbrugere')
-    col1.dataframe(df_besp[['Adresse', 'årligt forbrug']].sort_values('årligt forbrug', ascending=Falsev).round(1).head(10).style.background_gradient(cmap='Reds'), use_container_width=True)
+    col1.dataframe(df_besp[['Adresse', 'årligt forbrug']].sort_values('årligt forbrug', ascending=False).round(1).head(10).style.background_gradient(cmap='Reds'), use_container_width=True)
     if 'df_g' in st.session_state:
         col2.header('Top standby forbedringer')
         col2.dataframe(st.session_state['df_g'].round(1).head(10).style.background_gradient(cmap='Blues'), use_container_width=True)
