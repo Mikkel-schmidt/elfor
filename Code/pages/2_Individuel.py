@@ -161,7 +161,7 @@ col2.markdown('Tallet i midten er det gennemsnitlige forbrug i den time på den 
 # df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 # Find the maximum date in the dataframe
-max_date = df['from'].dt.date.max()
+max_date = df['from'].max()
 st.write(max_date)
 # Calculate the date three months prior
 three_months_prior = max_date - pd.DateOffset(months=3)
