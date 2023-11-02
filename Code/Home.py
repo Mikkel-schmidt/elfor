@@ -67,7 +67,7 @@ if check_password():
         return df
 
     df = meters_overblik()
-    st.write(df.head())
+
     df['meter'] = pd.to_numeric(df['meter'])
     df['from'] = pd.to_datetime(df['from'], utc=True) 
     #df = df.groupby('Adresse').mean().reset_index()
@@ -125,8 +125,8 @@ if check_password():
     #with col2:
     st.markdown('---')
     col1 , col2= st.columns([1,1])
-    col1.header('Top driftsforbedringer')
-    col1.dataframe(df_besp[['Adresse', 'årligt forbrug', '%']].round(1).head(10).style.background_gradient(cmap='Reds'), use_container_width=True)
+    col1.header('Top 10 forbrugere')
+    col1.dataframe(df_besp[['Adresse', 'årligt forbrug']].round(1).head(10).style.background_gradient(cmap='Reds'), use_container_width=True)
     if 'df_g' in st.session_state:
         col2.header('Top standby forbedringer')
         col2.dataframe(st.session_state['df_g'].round(1).head(10).style.background_gradient(cmap='Blues'), use_container_width=True)
@@ -137,7 +137,7 @@ if check_password():
     #with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
     dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index()
-    st.write('Besparelsen er på ', str(df_besp[df_besp['Adresse']==adr]['%'].values[0].round(1)), ' %')
+    st.write('Forbruget er ', str(df_besp[df_besp['Adresse']==adr]['årligt forbrug'].values[0].round(1)), ' kWh om året')
 
     @st.cache_resource()
     def linesss(df):
