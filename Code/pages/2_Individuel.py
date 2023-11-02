@@ -167,7 +167,7 @@ st.write(max_date)
 three_months_prior = max_date - pd.DateOffset(months=3)
 
 # Filter the dataframe to keep only the last three months of data
-df_3mdr = df[df['from'].dt.date >= three_months_prior].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+df_3mdr = df[df['from'] >= three_months_prior].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 st.write(df_3mdr)
 
 with col1:
