@@ -136,8 +136,8 @@ if check_password():
 
     #with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
-    dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index()
-    st.write('Forbruget er ', str(df_besp[df_besp['Adresse']==adr]['årligt forbrug'].values[0].round(1)), ' kWh om året')
+    dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum'}).reset_index()
+    st.write('Forbruget er ', str(df_besp[df_besp['Adresse']==adr]['årligt forbrug'].values[0].round(0)), ' kWh om året')
 
     @st.cache_resource()
     def linesss(df):
@@ -146,10 +146,10 @@ if check_password():
             .add_xaxis(list(df['from']))
             .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=2, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
             linestyle_opts=opts.LineStyleOpts( width=1))
-            .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-            linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
-            .add_yaxis('Best', list(df['bkps'].where(dfff['bkps']==dfff['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-            linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
+            # .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+            # linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
+            # .add_yaxis('Best', list(df['bkps'].where(dfff['bkps']==dfff['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+            # linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
             .set_global_opts(
                 legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
                 title_opts=opts.TitleOpts(),
